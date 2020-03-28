@@ -5,20 +5,26 @@ const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
+
 const body = document.querySelector ('body');
 const menuItems = document.querySelector ('.js-menu');
 const inputChangeTheme = document.querySelector ('.js-switch-input');
-console.log(body);
-buildMenuItems (menu);
-inputChangeTheme.addEventListener ('change', handleChangeTheme);
-const feedback = localStorage.getItem ('theme');
 
-// if (feedback === true) {
-//   body.classList.remove (Theme.DARK);
-//   body.classList.add (Theme.LIGHT);
-// } else
-//  body.classList.remove (Theme.LIGHT);
-//  body.classList.add (Theme.DARK);
+buildMenuItems (menu);
+
+inputChangeTheme.addEventListener ('change', handleChangeTheme);
+
+const feedback = JSON.parse (localStorage.getItem ('theme'));
+const activeChecked = localStorage.getItem ('checked');
+
+getActiveTheme ();
+
+function getActiveTheme () {
+  if (feedback === 'dark-theme') {
+    body.classList.add (Theme.DARK);
+    inputChangeTheme.checked = activeChecked;
+  } else body.classList.add (Theme.LIGHT);
+}
 
 function handleChangeTheme (event) {
   switch (event.target.checked) {
@@ -31,11 +37,8 @@ function handleChangeTheme (event) {
       body.classList.add (Theme.DARK);
       break;
   }
-
-  localStorage.setItem (
-    'theme',
-    JSON.stringify (body.classList.contains (Theme.LIGHT))
-  );
+  localStorage.setItem ('theme', JSON.stringify (body.className));
+  localStorage.setItem ('checked', inputChangeTheme.checked);
 }
 
 function buildMenuItems (items) {

@@ -1,5 +1,6 @@
 # production
 /build
+.vscode
 
 # Logs
 logs
@@ -44,6 +45,7 @@ typings/
 
 # Optional npm cache directory
 .npm
+
 
 # Optional eslint cache
 .eslintcache
