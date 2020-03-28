@@ -1,5 +1,6 @@
 # production
-/build
+# /build
+/webpack
 .vscode
 
 # Logs
@@ -69,5 +70,3 @@ typings/
 .env.test.local
 .env.production.local
 
-#vscode
-.vscode
